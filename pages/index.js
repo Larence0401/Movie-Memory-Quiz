@@ -19,7 +19,6 @@ import { useEffect, useState } from 'react'
 
 export default function Home({movies,tile_data}) {
 const  [movieData,setMovieData] = useState([])
-console.log("type of tile data: " + typeof tile_data)
  // useEffect(() => setArray(getMovieIndexArray(6,12),[]))
  const [setting,setSetting] = useState({
                                           "tiles" : "12",
@@ -29,7 +28,16 @@ console.log("type of tile data: " + typeof tile_data)
 
 const [tileData, setTileData] = useState(tile_data)
 
+const[clickedTiles, setClickedTiles] = useState([])
+
 useEffect(() => startGame(), [])
+
+useEffect(() => {
+  //setClickedTiles(prevState => [...prevState,i])
+  console.log(clickedTiles)
+  handleFlipState()
+  
+      } ,[tileData])
  
   const handleChange = e => {
         const name = e.target.name
@@ -38,30 +46,59 @@ useEffect(() => startGame(), [])
   }
 
   const handleClick = i => {
-        const flipped = Object.keys(tileData[i])[2]
-        console.log(flipped)
-        console.log(tileData.map(tile => console.log("tile")))
-        //setTileData(prevState => ({...prevState, [flipped] : true}))
-       //tileData.map(tile => setTileData({...tile, ['isFlipped'] : true}))
-       let newArr = [...tileData]
-         newArr[i]['flipped'] = true
-         setTileData(newArr)
-       console.log(tileData[i]['flipped'])
-       console.log("handleClick" + i)
-       console.log(tileData[i])
+        let newArr = [...tileData]
+        newArr[i]['flipped'] = true
+        setTileData(newArr)
+        setClickedTiles(prevState => [...prevState,i])
+        //handleFlipState(i)
   }
   
   const startGame = async () => {
     //resetGame()
-    console.log(tileData)
+    //console.log(tileData)
     const randomizedSample = randomizeSample((setting['tiles']/2),19)
     setTileData(randomizedSample)
     //console.log(randomizedSample)
     const result = await getData()
     //console.log(result)
     setMovieData(result)
+  }
 
+  const handleFlipState = () => {
 
+    let newArr = [...tileData]
+    //let flipped = newArr.filter((el,index) => el['flipped'] === true)
+    if(clickedTiles.length === 2) {
+        let index1 = clickedTiles[0]
+        let index2 = clickedTiles[1]
+       // console.log("1st movie index: " + flipped[0]['index'])
+       // console.log("2nd movie index: " + flipped[1]['index'])
+     // if(flipped[0]['index'] === flipped[1]['index']) {
+      if(newArr[index1]['index'] === newArr[index2]['index']) {
+        console.log("equal")
+        //checkifSolved()
+      } else {
+        //flipping back tiles    
+        console.log("not equal")    
+        newArr[index1]['flipped'] = false
+        newArr[index2]['flipped'] = false
+        
+        setTileData(newArr)
+      }
+      console.log("movie index 1: " + newArr[index1]['index'])
+        console.log("movie index 2: " + newArr[index2]['index'])
+      console.log("index 1: " + clickedTiles[0])
+      console.log("index 2: " + clickedTiles[1])
+      //console.log(newArr[index1]['index'])
+      //console.log(newArr[index2]['index'])
+      setClickedTiles([])
+    }
+    
+    //console.log("flipped_arrb: " + newArr[0]['index'])
+    //filter tileData if 2 tiles are flipped =>
+            // check if 'index value' of both tiles is equal
+                    //if equal check if all tiles solved
+                    // if not equal set 'flipped state' to false
   }
 
   return <Wrapper>
