@@ -11,6 +11,7 @@ import Container from '../components/Container'
 import Menu from '../components/Menu'
 
 
+
 import { useEffect, useState } from 'react'
 
 
@@ -18,7 +19,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home({movies,tile_data}) {
 const  [movieData,setMovieData] = useState([])
-
+console.log("type of tile data: " + typeof tile_data)
  // useEffect(() => setArray(getMovieIndexArray(6,12),[]))
  const [setting,setSetting] = useState({
                                           "tiles" : "12",
@@ -26,7 +27,7 @@ const  [movieData,setMovieData] = useState([])
                                           "catB" : "poster_path"
                                         })
 
-const [tileData, setTileData] = useState([])
+const [tileData, setTileData] = useState(tile_data)
 
 useEffect(() => startGame(), [])
  
@@ -35,14 +36,29 @@ useEffect(() => startGame(), [])
         const value = e.target.value
                       setSetting(prevState => ({...prevState, [name] : value}))
   }
+
+  const handleClick = i => {
+        const flipped = Object.keys(tileData[i])[2]
+        console.log(flipped)
+        console.log(tileData.map(tile => console.log("tile")))
+        //setTileData(prevState => ({...prevState, [flipped] : true}))
+       //tileData.map(tile => setTileData({...tile, ['isFlipped'] : true}))
+       let newArr = [...tileData]
+         newArr[i]['flipped'] = true
+         setTileData(newArr)
+       console.log(tileData[i]['flipped'])
+       console.log("handleClick" + i)
+       console.log(tileData[i])
+  }
   
   const startGame = async () => {
     //resetGame()
-    const randomizedSample = randomizeSample((setting['tiles']/2),20)
+    console.log(tileData)
+    const randomizedSample = randomizeSample((setting['tiles']/2),19)
     setTileData(randomizedSample)
-    console.log(randomizedSample)
+    //console.log(randomizedSample)
     const result = await getData()
-    console.log(result)
+    //console.log(result)
     setMovieData(result)
 
 
@@ -52,7 +68,11 @@ useEffect(() => startGame(), [])
               <Header/>
               <Container>
                 <Menu handleSelect={e => handleChange(e)} startGame={startGame}/>
-                <Tiles movies={movies} tileData={tileData.length === 0 ? tile_data : tileData} setting={setting}/>
+                <Tiles id="tiles" 
+                       handleClick={i => handleClick(i)/*console.log("click in Home component" + i)*/}
+                       movies={movies} 
+                       tileData={tileData.length === 0 ? tile_data : tileData} 
+                       setting={setting}/>
               </Container>
               <Footer/>
           </Wrapper>
@@ -67,7 +87,8 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      movies: data
+      movies: data,
+      tile_data: tile_data
 
     }
   }
