@@ -1,23 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 
-const Tile = ({movie,onclick,isFlipped,isSolved,isImage}) => {
-    /*
-    console.log(isFlipped)
-    console.log(isSolved)
-    console.log(isImage)
-    console.log(movie)
-    */
+const Tile = ({movie,onclick,isFlipped,isImage,content, height}) => {
+
+   
     const BASE_URL = "https://image.tmdb.org/t/p/original/"
-   /* const handleClick = () => {
-        onclick()
-    } */
-    // isFlipped ? !isImage ? movie : <img src={`${BASE_URL}${movie}`}>
-    
-//{isFlipped && <img className="object-fill w-full h-full" src={`${BASE_URL}${movie}`}/>}     
+    let opacity = isFlipped ? "100" : "50"
+    //console.log(Number.isInteger(parseInt(movie.substring(0,4))))
+    let isTitle = !Number.isInteger(parseInt(movie.substring(0,4)))
+    let textformat = isTitle ? "title" : "year"
+    console.log(isImage)
+    console.log(content)
+    let title = "title"
+    let year = "year"
+
+
     return (
-        <div className="h-48 text-center bg-red overflow-hidden rounded-lg tile"
+        <div className={`tile h-128
+                         text-center relative bg-gray-200 object-fill overflow-hidden rounded-lg tile opacity-${opacity}
+                         `}
             onClick={onclick}>
-              {isFlipped ? !isImage ? movie : <img src={`${BASE_URL}${movie}`}></img> : "back"}
+              {isFlipped ? isImage ? <img className="opacity-100" src={`${BASE_URL}${movie}`}></img> : 
+                        <span className={textformat}>{movie}</span> : null}
+           
         </div>
     )
 }

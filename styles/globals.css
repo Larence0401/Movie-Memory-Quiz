@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    height: 100vh;
 }
 
 a {
@@ -15,11 +16,102 @@ a {
   box-sizing: border-box;
 }
 
-.tile {
-  height: 25vh;
-}
+.tile {min-height: 20%;}
 
-#container {background-image: url(/images/background_image.jpg)}
+/*#container {background-image: url('https://via.placeholder.com/150')}*/
+#container {background-image: url('/images/backround_image.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+            }
+
+  .modalBG {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0,0,0,.5)
+  }
+
+  .modal {
+    width: 30vw;
+    margin: 0 auto;
+    text-align: Center;
+    font-weight: 600;
+    font-size: 4em;
+    height: auto;
+    background-color: #fff;
+    padding: .5em;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255,.65);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    position: fixed;
+    left: 35vw;
+    animation-duration: 2s;
+    animation-name: scale;
+  }
+
+  .year {
+    display: inline-block;
+    font-size: 3em;
+    color:rgb(20,20,20);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+   /* margin-top: 25%;*/
+  }
+
+  .title {
+    display: inline-block;
+    text-align: center;
+    font-size: 1em;
+    color:rgb(20,20,20);
+    margin: 0 auto;
+    position: absolute;
+    padding: 1em;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+  }
+
+  .animate-tile {animation-duration: 1s;
+                 animation-name: tile;
+
+  }
+
+  @keyframes tile {
+                  from {
+                    opacity: .5;
+                  }
+
+                  50% {
+                    opacity: 0.1;
+                  }
+
+                  100% {
+                    opacity: .5;
+                  }
+  }
+
+  @keyframes scale {
+    from {transform: scale(1);
+          opacity:1;}
+    to {transform: scale(1.2);
+        opacity: 0.5;}
+  }
+/*#container {background: orange;}*/
+
+/*============================================
+FADE OUT
+============================*/
+
+
 
 @tailwind base;
 @tailwind components;

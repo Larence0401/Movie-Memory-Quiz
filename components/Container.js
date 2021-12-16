@@ -3,7 +3,7 @@ import React from 'react'
 const Container = props => {
     return (
         <>
-            <div id="container" className="flex justify-between items-center" id="container">{props.children}</div>
+            <div className="flex justify-between items-center" id="container">{props.children}</div>
         </>
     )
 }
