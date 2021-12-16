@@ -41,7 +41,7 @@ useEffect(() => handleFlipState(),[tileData])
   }
 
   const handleClick = i => {
-        if(clickedTiles.includes(i) || tileData[i]['flipped'] === true){return}
+        if(tileData[i]['flipped']){return}
         let newArr = [...tileData]
         newArr[i]['flipped'] = true
         setTileData(newArr)
@@ -52,19 +52,8 @@ useEffect(() => handleFlipState(),[tileData])
         startGame()
         showModal("Game started!")
   }
-/*
-  const showStartModal = () => {
-    alert("started")
-    const container = document.getElementById("container")
-    let modal = document.createElement("div")
-      modal.classList.add("modal")
-      modal.textContent = "Game started!"
-      container.appendChild(modal)
-  }
-*/
 
   const startGame = async () => {
-    setFlashed(true)
     const randomizedSample = randomizeSample((setting['tiles']/2),19)
     setTileData(randomizedSample)
     const result = await getData()
@@ -75,7 +64,6 @@ useEffect(() => handleFlipState(),[tileData])
       const arr = newArr.filter(el => el['flipped'] === true)
       console.log("flipped array length: " + arr)
       if(arr.length === parseInt(setting['tiles'])) {
-        setFlashed(false)
         showModal("You won!")
         startGame()
       }
@@ -120,7 +108,7 @@ useEffect(() => handleFlipState(),[tileData])
       
     }
   }
-  console.log(setting)
+
   let tiles = tileData.length
   return <Wrapper>
               <Container>
