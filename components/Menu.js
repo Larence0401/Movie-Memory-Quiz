@@ -1,13 +1,11 @@
 import React, {useState, Component} from 'react'
-import Select from 'react-select'
+import ClickCounter from './ClickCounter'
 
-const Menu = ({handleSelect, startGame}) => {
+const Menu = ({handleSelect, startGame,clicks}) => {
 
     const [tiles, setTiles] = useState("12")
     const [categoryA, setCategoryA] = useState("movie_poster")
     const [categoryB, setCategoryB] = useState("movie_poster")
-
-
 
     return (
         <div className="w-full max-w-xs h-full bg-black-500 flex flex-col px-4 py-8">
@@ -30,7 +28,7 @@ const Menu = ({handleSelect, startGame}) => {
             </select>
             
             <button type="button" className="bg-green-700 hover:bg-green-600 text-2xl tracking-wider uppercase font-bold py-4 mt-12 mx-4 text-white" onClick={startGame}>Start game</button>
-
+            <ClickCounter clicks={clicks}/>
         </div>
     )
 }

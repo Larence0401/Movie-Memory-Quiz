@@ -16,7 +16,10 @@ a {
   box-sizing: border-box;
 }
 
-.tile {min-height: 20%;}
+.tile {min-height: 20%;
+       display: flex;
+      justify-content: center;
+      align-items: center;}
 
 /*#container {background-image: url('https://via.placeholder.com/150')}*/
 #container {background-image: url('/images/backround_image.jpg');
@@ -56,28 +59,19 @@ a {
   }
 
   .year {
-    display: inline-block;
+    display: flex;
     font-size: 3em;
+    font-weight: 600;
     color:rgb(20,20,20);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-   /* margin-top: 25%;*/
   }
 
   .title {
-    display: inline-block;
-    text-align: center;
-    font-size: 1em;
+    display: flex;
+    padding: 1rem;
+    font-size: 1.5em;
+    font-weight: 600;
     color:rgb(20,20,20);
-    margin: 0 auto;
-    position: absolute;
-    padding: 1em;
-    width: 100%;
-    left: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    transform: translateX(-50%);
+    
   }
 
   .animate-tile {animation-duration: 1s;

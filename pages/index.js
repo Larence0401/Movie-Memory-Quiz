@@ -1,40 +1,31 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import getData from '../utils/getData'
 import randomizeSample from '../utils/RandomizeSample'
 import Tiles from '../components/Tiles'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Wrapper from '../components/Wrapper'
 import Container from '../components/Container'
 import Menu from '../components/Menu'
-
-
+import playSound from '../utils/playSound'
+import showModal from '../utils/showModal'
 import { useEffect, useState } from 'react'
-
-
 
 
 export default function Home({movies,tile_data}) {
 const  [movieData,setMovieData] = useState([])
- const [setting,setSetting] = useState({
+const [clicks,setClicks] = useState(0)
+const [setting,setSetting] = useState({
                                           "tiles" : "12",
                                           "catA" : "poster_path",
                                           "catB" : "poster_path"
                                         })
-
 const [tileData, setTileData] = useState(tile_data)
-
 const[clickedTiles, setClickedTiles] = useState([])
 
-const [flashed, setFlashed] = useState(true)
-
 useEffect(() => startGame(), [])
-
 useEffect(() => handleFlipState(),[tileData])
  
-  const handleChange = e => {
+  const handleChange = e => { 
         const name = e.target.name
         const value = e.target.value
                       setSetting(prevState => ({...prevState, [name] : value}))
@@ -46,6 +37,8 @@ useEffect(() => handleFlipState(),[tileData])
         newArr[i]['flipped'] = true
         setTileData(newArr)
         setClickedTiles(prevState => [...prevState,i])
+        setClicks(prevState => prevState + 1)
+        playSound('click.wav')
   }
 
   const startGameOnClick = () => {
@@ -58,36 +51,18 @@ useEffect(() => handleFlipState(),[tileData])
     setTileData(randomizedSample)
     const result = await getData()
     setMovieData(result)
-  }
-
-  const checkIfSolved = newArr => {
-      const arr = newArr.filter(el => el['flipped'] === true)
-      console.log("flipped array length: " + arr)
-      if(arr.length === parseInt(setting['tiles'])) {
-        showModal("You won!")
-        startGame()
-      }
-  }
-
-  const showModal = message => {
-      const container = document.getElementById("container")
-      let modalBG = document.createElement("div")
-      modalBG.classList.add("modalBG")
-      container.appendChild(modalBG)
-      let modal = document.createElement("div")
-      modal.classList.add("modal")
-      modal.textContent = message
-      container.appendChild(modal)
-      removeModal(modalBG,modal)
+    setClicks(0)
   }
 
 
-  const removeModal = (...args) => {
-      setTimeout(() => {
-          args.map(arg => container.removeChild(arg))
-      },3000)
-      
-  }
+  const checkIfSolved = array => { 
+    const arr = array.filter(el => el['flipped'] === true)
+    if(arr.length === parseInt(setting['tiles'])) {
+      showModal("You won!")
+      playSound('win.mp3')
+      startGame()
+    }
+}
 
   const handleFlipState = () => {
     let newArr = [...tileData]
@@ -97,40 +72,37 @@ useEffect(() => handleFlipState(),[tileData])
     else if(clickedTiles.length === 3) {
         let index1 = clickedTiles[0]
         let index2 = clickedTiles[1]
-      if(newArr[index1]['index'] === newArr[index2]['index']) {
-        
+      if(newArr[index1]['index'] === newArr[index2]['index']) {       
       } else {    
         newArr[index1]['flipped'] = false
         newArr[index2]['flipped'] = false     
         setTileData(newArr)
       }
-      setClickedTiles(prevState => [prevState[2]])
-      
+      setClickedTiles(prevState => [prevState[2]])    
     }
   }
 
   let tiles = tileData.length
-  return <Wrapper>
+  return    <Wrapper>
               <Container>
-                <Menu handleSelect={e => handleChange(e)} startGame={startGameOnClick}/>
+                <Menu handleSelect={e => handleChange(e)} 
+                startGame={startGameOnClick}
+                clicks={clicks}/>
                 <Tiles 
                        handleClick={i => handleClick(i)}
-                       flashed={flashed}
                        movies={movies} 
                        tiles={tiles}
                        tileData={tileData.length === 0 ? tile_data : tileData} 
                        clickedTiles={clickedTiles}
                        setting={setting}/>
               </Container>
-          </Wrapper>
-     
+              </Wrapper>    
 }
 
 export const getStaticProps = async () => {
 
   const data = await getData()
   const tile_data = await randomizeSample()
-
 
   return {
     props: {
