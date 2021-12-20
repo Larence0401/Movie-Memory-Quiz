@@ -1,6 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Movie Memory App 
+
+## Description
+This app is an implementation of the classic memory card game. It fetches data from the open TheMovieDB API and comes with some additional features. Not only can you select the total number of cards you want to play with, you can also match different properties like movie poster, title and year of release, thus allowing 9 different combinations.
+
+## Why I built this app
+Developing this project helped me immensely in learning to handle data structures and state management. It is also in this project that I gave tailwind css a first try. 
+
+## Tech Stack
+- Javascript ES6
+- ReactJS
+- NextJS
+- Tailwind CSS
+
+## How to install and run the project
+
+1) Clone the project, running git **clone https://github.com/Larence0401/Movie-Memory-Quiz.git**
+
+2) Install dependencies running **npm i** in your terminal
+
+3) Register on **https://www.themoviedb.org/settings/api** in order to get a free API key for the movie database assigned.
+
+4) create a file named **.env.local** in the project's root folder and assign your *themoviedb* API key the the environment variable: **API_KEY=[API Key]**
+
+## How to use the project
+
+If you are planning to use the project with a different API, 
 
 First, run the development server:
 
