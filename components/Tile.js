@@ -8,7 +8,7 @@ const Tile = ({movie,onclick,isFlipped,isImage}) => {
     let textformat = isTitle ? "title" : "year"
 
     return (
-        <div className={`tile h-128
+        <div className={`tile md:h-128 h-mobile_height
                          text-center relative bg-gray-200 object-fill overflow-hidden rounded-lg tile opacity-${opacity}
                          `}
             onClick={onclick}>

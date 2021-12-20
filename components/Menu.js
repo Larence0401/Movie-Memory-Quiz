@@ -1,5 +1,8 @@
 import React, {useState, Component} from 'react'
 import ClickCounter from './ClickCounter'
+import {FontAwesomeIcon} from "@fortawesome/fontawesome-free"
+import {faCoffee} from "@fortawesome/fontawesome-free"
+
 
 const Menu = ({handleSelect, startGame,clicks}) => {
 
@@ -7,10 +10,19 @@ const Menu = ({handleSelect, startGame,clicks}) => {
     const [categoryA, setCategoryA] = useState("movie_poster")
     const [categoryB, setCategoryB] = useState("movie_poster")
 
+    const handleClick = () => {
+        const menu = document.getElementById('menu')   
+        menu.style.display === "flex" ? menu.style.display = "none" : menu.style.display = "flex"
+     }
+
     return (
-        <div className="w-full max-w-xs h-full bg-black-500 flex flex-col px-4 py-8">
+        <>
+        <span id="menu-icon" className='text-white text-6xl mr-8 mt-8 flex self-end mr-4 md:hidden' onClick={handleClick}>
+            <i className='fa fa-bars'></i>
+        </span>
+        <div className="w-full md:max-w-xs h-full flex self-end md:self-center bg-black-500 flex-col px-12 md:px-4 py-8" id="menu">
             <label htmlFor="tiles" className="text-gray-300 italic ml-4 text-xl">Playing with ...</label>
-            <select name="tiles" id="tiles" className="p-1 mx-4 mb-8 mt-2 text-lg font-semibold leading-6" onChange={handleSelect}>
+            <select name="tiles" id="tiles" className="p-1 mx-4 mb-8 mt-2 text-xl md:text-lg font-semibold" onChange={handleSelect}>
                 <option value="12">12 tiles</option>
                 <option value="18">18 tiles</option>
             </select>
@@ -30,6 +42,7 @@ const Menu = ({handleSelect, startGame,clicks}) => {
             <button type="button" className="bg-green-700 hover:bg-green-600 text-2xl tracking-wider uppercase font-bold py-4 mt-12 mx-4 text-white" onClick={startGame}>Start game</button>
             <ClickCounter clicks={clicks}/>
         </div>
+        </>
     )
 }
 

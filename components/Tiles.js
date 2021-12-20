@@ -4,7 +4,7 @@ import Tile from "./Tile";
 const Tiles = ({ movies, tileData, setting,handleClick,tiles}) => {
 
   return (
-    <div className={`w-5/6 grid grid-cols-3 md:grid-cols-${tiles/3} grid-rows-3 gap-4 p-8 h-full`}  id="memory">
+    <div className={`w-full md:w-5/6 grid grid-cols-3 md:grid-cols-${tiles/3} md:grid-rows-3 gap-4 p-8 h-full`}  id="memory">
       {tileData.map((tile, i) => {
         let content = tile.partition === 0 ? setting.catA : setting.catB;
         let isImage = content === "poster_path" ? true : false;

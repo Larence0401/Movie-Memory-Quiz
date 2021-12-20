@@ -11,6 +11,7 @@ import showModal from '../utils/showModal'
 import { useEffect, useState } from 'react'
 
 
+
 export default function Home({movies,tile_data}) {
 const  [movieData,setMovieData] = useState([])
 const [clicks,setClicks] = useState(0)
@@ -46,12 +47,18 @@ useEffect(() => handleFlipState(),[tileData])
         showModal("Game started!")
   }
 
+  const closeMobileMenu = () => {
+    const menu = document.getElementById('menu')
+    window.innerWidth <= 768 ? menu.style.display = "none" : null
+  }
+
   const startGame = async () => {
     const randomizedSample = randomizeSample((setting['tiles']/2),19)
     setTileData(randomizedSample)
     const result = await getData()
     setMovieData(result)
     setClicks(0)
+    closeMobileMenu()
   }
 
 
@@ -83,7 +90,12 @@ useEffect(() => handleFlipState(),[tileData])
   }
 
   let tiles = tileData.length
-  return    <Wrapper>
+  return    <>
+            <Head>
+                  <title>Memory Quiz</title>
+                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            </Head>
+            <Wrapper>
               <Container>
                 <Menu handleSelect={e => handleChange(e)} 
                 startGame={startGameOnClick}
@@ -96,7 +108,8 @@ useEffect(() => handleFlipState(),[tileData])
                        clickedTiles={clickedTiles}
                        setting={setting}/>
               </Container>
-              </Wrapper>    
+            </Wrapper>    
+            </>
 }
 
 export const getStaticProps = async () => {

@@ -11,6 +11,7 @@ const showModal = message => {
     container.appendChild(modalBG)
     let modal = document.createElement("div")
     modal.classList.add("modal")
+    window.innerWidth <= 768 ? modal.classList.add("modal-mobile") : null
     modal.textContent = message
     container.appendChild(modal)
     removeModal(modalBG,modal)

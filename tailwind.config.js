@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       height: {
         '128': '30vh',
+        'mobile_height': '19vh'
       }
     },
   },

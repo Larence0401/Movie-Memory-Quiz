@@ -1,3 +1,5 @@
+
+
 html,
 body {
   padding: 0;
@@ -21,7 +23,6 @@ a {
       justify-content: center;
       align-items: center;}
 
-/*#container {background-image: url('https://via.placeholder.com/150')}*/
 #container {background-image: url('/images/backround_image.jpg');
   background-size: cover;
   height: 100vh;
@@ -39,23 +40,31 @@ a {
   }
 
   .modal {
-    width: 30vw;
     margin: 0 auto;
     text-align: Center;
     font-weight: 600;
-    font-size: 4em;
+    font-size: 4rem;
     height: auto;
     background-color: #fff;
-    padding: .5em;
+    padding: 1em;
     border-radius: 10px;
     background-color: rgba(255, 255, 255,.65);
     backdrop-filter: blur(5px);
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
     z-index: 1001;
     position: fixed;
-    left: 35vw;
+    top: 40vh;
+    left: 38vw;
     animation-duration: 2s;
     animation-name: scale;
+  }
+
+  .modal-mobile {
+    font-size: 6vw;
+    left: 50%;
+    width: 360px;
+    margin-left: -180px;
+
   }
 
   .year {
@@ -98,6 +107,10 @@ a {
           opacity:1;}
     to {transform: scale(1.2);
         opacity: 0.5;}
+  }
+
+  @media screen and (min-width: 768px) {
+    #menu-icon {display: none;}
   }
 /*#container {background: orange;}*/
 
