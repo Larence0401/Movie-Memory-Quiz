@@ -25,7 +25,7 @@ a {
 
 #container {background-image: url('/images/backround_image.jpg');
   background-size: cover;
-  height: 100vh;
+  height: auto;
   display: flex;
             }
 
