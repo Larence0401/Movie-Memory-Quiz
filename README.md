@@ -2,7 +2,7 @@
 # Movie Memory App 
 
 ## Description
-This app is an implementation of the classic memory card game. It fetches data from the open TheMovieDB API and comes with some additional features. Not only can you select the total number of cards you want to play with, you can also match different properties like movie poster, title and year of release, thus allowing 9 different combinations.
+This app is an implementation of the classic memory card game. It fetches data from the open TheMovieDB API and comes with some additional features. Not only can you select the total number of cards you want to play with, you can also match different properties like movie poster, title and year of release, thus allowing 9 different combinations. 
 
 ## Why I built this app
 Developing this project helped me immensely in learning to handle data structures and state management. It is also in this project that I gave tailwind css a first try. 
@@ -13,6 +13,16 @@ Developing this project helped me immensely in learning to handle data structure
 - NextJS
 - Tailwind CSS
 
+## Features
+- either 12 or 18 cards can be selected for the game
+- 3 different properties can be selected for each half of a pair of cards (movie poster, year of release, title)
+- mobile layout with toggle menu
+- sound effect on mouse click
+- sound effect when game has finished
+- modal showing up when game starts and ends
+- app fetches data from a random page of the *themoviedb* API out of 10 pages in total upon each reload
+- app randomly shuffles a dataset of movies
+
 ## How to install and run the project
 
 1) Clone the project, running git **clone https://github.com/Larence0401/Movie-Memory-Quiz.git**
@@ -21,36 +31,14 @@ Developing this project helped me immensely in learning to handle data structure
 
 3) Register on **https://www.themoviedb.org/settings/api** in order to get a free API key for the movie database assigned.
 
-4) create a file named **.env.local** in the project's root folder and assign your *themoviedb* API key the the environment variable: **API_KEY=[API Key]**
+4) create a file named **.env.local** in the project's root folder and assign your *themoviedb* API key the the environment variable: **API_KEY=[API key]**
 
 ## How to use the project
 
-If you are planning to use the project with a different API, 
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+If you are planning to use the project with a different API, you can do so by adjusting the helper functions *getData.js* and *randomizeSample.js* in the utils folder, by changing the key-value pairs in the settings state  in index.js, and by tweaking the JSX attributes in the Menu Component.
+The 2 functions *getData.js* and *randomizeSample.js* are involved in hydrating the app. getData.js fetches a dataset from the external API and returns a promise. getData.js initializes the state of movieData, which is an array of objects.
+*randomizeSample.js* takes 2 parameters throuh a helper function, which are the number of cards in a game and the highest index in the array of objects returned by *getData.js*.
+*randomizeSample.js* then randomly determines, based on those 2 parameters, the subset of movies being retrieved from the dataset returned by *getData.js*. It then duplicates that subset, shuffles it and initializes the state of tileData. It is then the *tileData* array which is mapped through in the *Tiles* component. Each iterator of *tileData* is an object with 3 key-value-pairs (index of movie object in *movieData*, the partition each card belongs to and a boolean indicating whether a card is flipped or not) being passed down as props to each instance of the *Tile* component.  
 
 ## Deploy on Vercel
 
