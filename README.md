@@ -1,13 +1,12 @@
 
 # Movie Memory App 
-
-##Here you get to the [**LIVE APP**](http://https://movie-memory-quiz.vercel.app/)
+&nbsp;
+## Here you get to the [**LIVE APP**](http://https://movie-memory-quiz.vercel.app/)
 
 
 ![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/86207164/146981393-f47b0574-5265-402f-8f94-436c95e7d0fd.gif)
 
 
-&nbsp;
 ## Description!
 
 This app is an implementation of the classic memory card game. It fetches data from the open TheMovieDB API and comes with some additional features. Not only can you select the total number of cards you want to play with, you can also match different properties like movie poster, title and year of release, thus allowing 9 different combinations. 
