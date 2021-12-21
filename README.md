@@ -43,9 +43,12 @@ Developing this project helped me immensely in learning to handle data structure
 ## How to use the project
 
 If you are planning to use the project with a different API, you can do so by adjusting the helper functions *getData.js* and *randomizeSample.js* in the utils folder, by changing the key-value pairs in the settings state  in index.js, and by tweaking the JSX attributes in the Menu Component.
-The 2 functions *getData.js* and *randomizeSample.js* are involved in hydrating the app. getData.js fetches a dataset from the external API and returns a promise. getData.js initializes the state of movieData, which is an array of objects.
-*randomizeSample.js* takes 2 parameters throuh a helper function, which are the number of cards in a game and the highest index in the array of objects returned by *getData.js*.
-*randomizeSample.js* then randomly determines, based on those 2 parameters, the subset of movies being retrieved from the dataset returned by *getData.js*. It then duplicates that subset, shuffles it and initializes the state of tileData. It is then the *tileData* array which is mapped through in the *Tiles* component. Each iterator of *tileData* is an object with 3 key-value-pairs (index of movie object in *movieData*, the partition each card belongs to and a boolean indicating whether a card is flipped or not) being passed down as props to each instance of the *Tile* component.  
+
+The 2 functions *getData.js* and *randomizeSample.js* are involved in hydrating the app. getData.js fetches a dataset from the external API and returns a promise. getData.js initializes the state of movieData, which is an array of objects. *randomizeSample.js* takes 2 parameters throuh a helper function, which are the number of cards in a game and the highest index in the array of objects returned by *getData.js*.
+
+*randomizeSample.js* then randomly determines, based on those 2 parameters, the subset of movies being retrieved from the dataset returned by *getData.js*. It then duplicates that subset, shuffles it and initializes the state of tileData. 
+
+It is then the *tileData* array which is mapped through in the *Tiles* component. Each iterator of *tileData* is an object with 3 key-value-pairs (index of movie object in *movieData*, the partition each card belongs to and a boolean indicating whether a card is flipped or not) being passed down as props to each instance of the *Tile* component.  
 
 ## Deploy on Vercel
 
