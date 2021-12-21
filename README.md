@@ -1,7 +1,7 @@
 
 # Movie Memory App 
 &nbsp;
-## Here you get to the [**LIVE APP**](http://http://movie-memory-quiz.vercel.app/)
+## Here you get to the [**LIVE APP**](http://movie-memory-quiz.vercel.app/)
 
 
 ![ezgif com-gif-maker-3](https://user-images.githubusercontent.com/86207164/146981393-f47b0574-5265-402f-8f94-436c95e7d0fd.gif)
